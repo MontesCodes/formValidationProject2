@@ -18,7 +18,7 @@
         type="text"
         value=""
         placeholder="Enter your name"
-        id="texStudentName"
+        id="txtStudentName"
         name="txtStudentName"
       />
       <span id="spnIsStudentNameValid"></span><br /><br />
@@ -28,7 +28,28 @@
 
     <script type="text/javascript">
       function validate() {
-        return false;
+        let isStudentNameValid = true;
+
+        if (document.getElementById('txtStudentName').value == '');
+        {
+          isStudentNameValid = false;
+          document.getElementById('spnIsStudentNameValid').innerHTML =
+            'Please enter your name';
+          document.getElementById('spnIsStudentNameValid').style.color = 'red';
+        }
+        // unable to use else here as instructed in video 1
+        if (document.getElementById('txtStudentName').value.length > 1) {
+          isStudentNameValid = true;
+          document.getElementById('spnIsStudentNameValid').innerHTML = 'Valid';
+          document.getElementById('spnIsStudentNameValid').style.color =
+            'green';
+        }
+
+        if (isStudentNameValid == false) {
+          return false;
+        } else {
+          return true;
+        }
       }
     </script>
   </body>
