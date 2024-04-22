@@ -41,6 +41,7 @@
     <script type="text/javascript">
       function validate() {
         let isStudentNameValid = true;
+        let spnIsStudentPasswordValid = true;
 
         if (document.getElementById('txtStudentName').value == '');
         {
@@ -58,7 +59,21 @@
             'green';
         }
 
-        if (isStudentNameValid == false) {
+        if (document.getElementById('pwdStudent').value == '') {
+          isStudentPasswordValid = false;
+          document.getElementById('spnIsStudentPasswordValid').innerHTML =
+            '&#x2716; Please enter your password';
+          document.getElementById('spnIsStudentPasswordValid').style.color =
+            'red';
+        } else {
+          isStudentPasswordValid = true;
+          document.getElementById('spnIsStudentPasswordValid').innerHTML =
+            '&#x2714; Valid';
+          document.getElementById('spnIsStudentPasswordValid').style.color =
+            'green';
+        }
+
+        if (isStudentNameValid == false || isStudentPasswordValid == false) {
           return false;
         } else {
           return true;
@@ -67,6 +82,7 @@
       // clears the error message when the reset button is clicked
       function resetForm() {
         document.getElementById('spnIsStudentNameValid').innerHTML = '';
+        document.getElementById('spnIsStudentPasswordValid').innerHTML = '';
       }
     </script>
   </body>
