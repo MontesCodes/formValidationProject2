@@ -12,6 +12,7 @@
       id="frmStudentRegistration"
       name="frmStudentRegistration"
       onsubmit="return validate()"
+      onreset="resetForm()"
     >
       <label for="txtStudentName">Student Name:</label><br />
       <input
@@ -34,13 +35,14 @@
         {
           isStudentNameValid = false;
           document.getElementById('spnIsStudentNameValid').innerHTML =
-            'Please enter your name';
+            '&#x2716; Please enter your name';
           document.getElementById('spnIsStudentNameValid').style.color = 'red';
         }
         // unable to use else here as instructed in video 1
         if (document.getElementById('txtStudentName').value.length > 1) {
           isStudentNameValid = true;
-          document.getElementById('spnIsStudentNameValid').innerHTML = 'Valid';
+          document.getElementById('spnIsStudentNameValid').innerHTML =
+            '&#x2714; Valid';
           document.getElementById('spnIsStudentNameValid').style.color =
             'green';
         }
@@ -50,6 +52,10 @@
         } else {
           return true;
         }
+      }
+      // clears the error message when the reset button is clicked
+      function resetForm() {
+        document.getElementById('spnIsStudentNameValid').innerHTML = '';
       }
     </script>
   </body>
