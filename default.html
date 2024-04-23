@@ -40,25 +40,28 @@
 
     <script type="text/javascript">
       function validate() {
+        // assume student name is valid
         let isStudentNameValid = true;
+        // assume student password is valid
         let spnIsStudentPasswordValid = true;
-
+        // if the student name is empty, display an error message
         if (document.getElementById('txtStudentName').value == '');
         {
-          isStudentNameValid = false;
+          isStudentNameValid = false; // student name is not valid
           document.getElementById('spnIsStudentNameValid').innerHTML =
             '&#x2716; Please enter your name';
           document.getElementById('spnIsStudentNameValid').style.color = 'red';
         }
         // unable to use else here as instructed in video 1
-        if (document.getElementById('txtStudentName').value.length > 1) {
+        // if the student password is empty, display an error message
+        if (document.getElementById('txtStudentName').value.length > 0) {
           isStudentNameValid = true;
           document.getElementById('spnIsStudentNameValid').innerHTML =
             '&#x2714; Valid';
           document.getElementById('spnIsStudentNameValid').style.color =
             'green';
         }
-
+        // if the student password is empty, display an error message
         if (document.getElementById('pwdStudent').value == '') {
           isStudentPasswordValid = false;
           document.getElementById('spnIsStudentPasswordValid').innerHTML =
@@ -66,20 +69,21 @@
           document.getElementById('spnIsStudentPasswordValid').style.color =
             'red';
         } else {
+          // if the student password is not empty, display a success message
           isStudentPasswordValid = true;
           document.getElementById('spnIsStudentPasswordValid').innerHTML =
             '&#x2714; Valid';
           document.getElementById('spnIsStudentPasswordValid').style.color =
             'green';
         }
-
+        // if the student name or password is not valid, prevent the form from being submitted
         if (isStudentNameValid == false || isStudentPasswordValid == false) {
           return false;
         } else {
           return true;
         }
       }
-      // clears the error message when the reset button is clicked
+      // reset the form
       function resetForm() {
         document.getElementById('spnIsStudentNameValid').innerHTML = '';
         document.getElementById('spnIsStudentPasswordValid').innerHTML = '';
