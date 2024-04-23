@@ -32,7 +32,17 @@
         id="pwdStudent"
         name="pwdStudent"
       />
-      <span id="spnIsStudentPasswordValid"></span><br /><br />
+      <span id="spnIsStudentPasswordValid"></span><br />
+
+      <label for="cpwdStudent">Confirm Password:</label><br />
+      <input
+        type="password"
+        value=""
+        placeholder="Confirm your password"
+        id="cpwdStudent"
+        name="cpwdStudent"
+      />
+      <span id="spnIsStudentCPasswordValid"></span><br /><br />
 
       <input type="submit" value="SUBMIT" />
       <input type="reset" value="RESET" />
@@ -44,6 +54,9 @@
         let isStudentNameValid = true;
         // assume student password is valid
         let spnIsStudentPasswordValid = true;
+        // assume student confirm password is valid
+        let spnIsStudentCPasswordValid = true;
+
         // if the student name is empty, display an error message
         if (document.getElementById('txtStudentName').value == '');
         {
@@ -76,11 +89,30 @@
           document.getElementById('spnIsStudentPasswordValid').style.color =
             'green';
         }
+
+        // if the student confirm password is empty, display an error message
+        if (document.getElementById(cpwdStudent).value == '') {
+          spnIsStudentCPasswordValid = false; // student confirm password is not valid
+          document.getElementById('spnIsStudentCPasswordValid').innerHTML =
+            '&#x2716; Please confirm your password';
+          document.getElementById('spnIsStudentCPasswordValid').style.color =
+            'red';
+        } else if (
+          document.getElementById('pwdStudent').value !=
+          document.getElementById('cpwdStudent').value
+        ) {
+          spnIsStudentCPasswordValid = false; // student confirm password is not valid
+          document.getElementById('spnIsStudentCPasswordValid').innerHTML =
+            '&#x2716; Passwords do not match';
+          document.getElementById('spnIsStudentCPasswordValid').style.color =
+            'red';
+        }
+
         // if the student name or password is not valid, prevent the form from being submitted
         if (isStudentNameValid == false || isStudentPasswordValid == false) {
-          return false;
+          return false; // form will not be submitted
         } else {
-          return true;
+          return true; // form will be submitted
         }
       }
       // reset the form

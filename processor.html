@@ -7,17 +7,19 @@
   </head>
   <body>
     <script type="text/javascript">
+      // get the query string
       let queryString = window.location.search;
+      // create a URLSearchParams object
       let queryStringParams = new URLSearchParams(queryString);
 
       document.write(
         'Student Name: ' + queryStringParams.get('txtStudentName'),
         '<br>',
-      );
+      ); // display the student name
       document.write(
         'Student Password: ' + queryStringParams.get('pwdStudent'),
         '<br>',
-      );
+      ); // display the student password
     </script>
   </body>
 </html>
