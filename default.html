@@ -53,9 +53,9 @@
         // assume student name is valid
         let isStudentNameValid = true;
         // assume student password is valid
-        let spnIsStudentPasswordValid = true;
+        let isStudentPasswordValid = true;
         // assume student confirm password is valid
-        let spnIsStudentCPasswordValid = true;
+        let isStudentCPasswordValid = true;
 
         // if the student name is empty, display an error message
         if (document.getElementById('txtStudentName').value == '');
@@ -92,24 +92,35 @@
 
         // if the student confirm password is empty, display an error message
         if (document.getElementById(cpwdStudent).value == '') {
-          spnIsStudentCPasswordValid = false; // student confirm password is not valid
+          isStudentCPasswordValid = false; // student confirm password is not valid
           document.getElementById('spnIsStudentCPasswordValid').innerHTML =
             '&#x2716; Please confirm your password';
           document.getElementById('spnIsStudentCPasswordValid').style.color =
             'red';
         } else if (
-          document.getElementById('pwdStudent').value !=
-          document.getElementById('cpwdStudent').value
+          document.getElementById('cpwdStudent').value !=
+          document.getElementById('pwdStudent').value
         ) {
-          spnIsStudentCPasswordValid = false; // student confirm password is not valid
+          isStudentCPasswordValid = false; // student confirm password is not valid
           document.getElementById('spnIsStudentCPasswordValid').innerHTML =
             '&#x2716; Passwords do not match';
           document.getElementById('spnIsStudentCPasswordValid').style.color =
             'red';
+        } else {
+          // if the student confirm password is not empty, display a success message
+          isStudentCPasswordValid = true; // student confirm password is valid
+          document.getElementById('spnIsStudentCPasswordValid').innerHTML =
+            '&#x2714; Valid';
+          document.getElementById('spnIsStudentCPasswordValid').style.color =
+            'green';
         }
 
-        // if the student name or password is not valid, prevent the form from being submitted
-        if (isStudentNameValid == false || isStudentPasswordValid == false) {
+        // if the student name, password, or confirm password is not valid, the form will not be submitted
+        if (
+          isStudentNameValid == false ||
+          isStudentPasswordValid == false ||
+          isStudentCPasswordValid == false
+        ) {
           return false; // form will not be submitted
         } else {
           return true; // form will be submitted
@@ -119,6 +130,7 @@
       function resetForm() {
         document.getElementById('spnIsStudentNameValid').innerHTML = '';
         document.getElementById('spnIsStudentPasswordValid').innerHTML = '';
+        document.getElementById('spnIsStudentCPasswordValid').innerHTML = '';
       }
     </script>
   </body>
