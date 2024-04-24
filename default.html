@@ -68,17 +68,18 @@
         <option value="phd">PhD</option>
       </select>
       <span id="spnIsStudentQualificationValid"></span><br />
-
+      <!-- Email ID label/field -->
       <label for="">Email ID:</label><br />
       <input
-        type="email"
+        type="text"
         value=""
         id="txtStudentEmailID"
         placeholder="Enter your email id"
         name="txtStudentEmailID"
-      /><br />
+      />
       <span id="spnIsStudentEmailIDValid"></span><br /><br />
 
+      <!-- input type submit and reset -->
       <input type="submit" value="SUBMIT" />
       <input type="reset" value="RESET" />
     </form>
@@ -95,6 +96,8 @@
         let isStudentGenderValid = true;
         // assume student qualification is valid
         let isStudentQualificationValid = true;
+        // assume student email ID is valid
+        let isStudentEmailIDValid = true;
 
         // if the student name is empty, display an error message
         if (document.getElementById('txtStudentName').value == '') {
@@ -189,14 +192,41 @@
             'spnIsStudentQualificationValid',
           ).style.color = 'green';
         }
+        // if the student email ID is empty, display an error message
+        if (document.getElementById('txtStudentEmailID').value == '') {
+          isStudentEmailIDValid = false; // student email ID is not valid
+          document.getElementById('spnIsStudentEmailIDValid').innerHTML =
+            '&#x2716; Please enter your email ID';
+          document.getElementById('spnIsStudentEmailIDValid').style.color =
+            'red';
+        } else if (
+          // if the student email ID fails the regular expression test, display an error message
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+            document.getElementById('txtStudentEmailID').value,
+          ) == false
+        ) {
+          isStudentEmailIDValid = false; // student email ID is not valid
+          document.getElementById('spnIsStudentEmailIDValid').innerHTML =
+            '&#x2716; Please enter a valid email ID';
+          document.getElementById('spnIsStudentEmailIDValid').style.color =
+            'red';
+        } else {
+          // if the student email ID passes the regular expression test, display a success message
+          isStudentEmailIDValid = true;
+          document.getElementById('spnIsStudentEmailIDValid').innerHTML =
+            '&#x2714; Valid';
+          document.getElementById('spnIsStudentEmailIDValid').style.color =
+            'green';
+        }
 
-        // if the student name is not valid or student password is not valid or student confirm password is not valid or student qualification is not valid, form will not be submitted
+        // if the student name is not valid or student password is not valid or student confirm password is not valid or student qualification is not valid, or student email ID is not valid, form will not be submitted
         if (
           isStudentNameValid == false ||
           isStudentPasswordValid == false ||
           isStudentCPasswordValid == false ||
           isStudentGenderValid == false ||
-          isStudentQualificationValid == false
+          isStudentQualificationValid == false ||
+          isStudentEmailIDValid == false
         ) {
           return false; // form will not be submitted
         } else {
@@ -211,6 +241,7 @@
         document.getElementById('spnIsStudentGenderValid').innerHTML = '';
         document.getElementById('spnIsStudentQualificationValid').innerHTML =
           '';
+        document.getElementById('spnIsStudentEmailIDValid').innerHTML = '';
         // document.getElementById('rdbMale').checked = false;
         // document.getElementById('rdbFemale').checked = false;
       }
