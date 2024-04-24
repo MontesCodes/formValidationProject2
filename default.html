@@ -42,7 +42,19 @@
         id="cpwdStudent"
         name="cpwdStudent"
       />
-      <span id="spnIsStudentCPasswordValid"></span><br /><br />
+      <span id="spnIsStudentCPasswordValid"></span><br />
+
+      <label for="rdbStudentGender">Gender:</label><br />
+      <input type="radio" value="male" id="rdbMale" name="rdbStudentGender" />
+      <label for="rdbMale">Male</label>
+      <input
+        type="radio"
+        value="female"
+        id="rdbFemale"
+        name="rdbStudentGender"
+      />
+      <label for="rdbFemale">Female</label>
+      <span id="spnIsStudentGenderValid"></span><br /><br />
 
       <input type="submit" value="SUBMIT" />
       <input type="reset" value="RESET" />
@@ -56,6 +68,8 @@
         let isStudentPasswordValid = true;
         // assume student confirm password is valid
         let isStudentCPasswordValid = true;
+        // assume student gender is valid
+        let spnIsStudentGenderValid = true;
 
         // if the student name is empty, display an error message
         if (document.getElementById('txtStudentName').value == '') {
@@ -113,12 +127,31 @@
           document.getElementById('spnIsStudentCPasswordValid').style.color =
             'green';
         }
+        // if rdbMale radio button is not checked and rdbFemale radio button is not checked, display an error message
+        if (
+          document.getElementById('rdbMale').checked != true &&
+          document.getElementById('rdbFemale').checked != true
+        ) {
+          isStudentGenderValid = false; // consider student gender as not valid
+          document.getElementById('spnIsStudentGenderValid').innerHTML =
+            '&#x2716; Please select your Gender';
+          document.getElementById('spnIsStudentGenderValid').style.color =
+            'red';
+        } // if rdbMale radio button is checked or rdbFemale radio button is checked, display a success message
+        else {
+          isStudentGenderValid = true; // consider student gender as valid
+          document.getElementById('spnIsStudentGenderValid').innerHTML =
+            '&#x2714; Valid';
+          document.getElementById('spnIsStudentGenderValid').style.color =
+            'green';
+        }
 
-        // if the student name, password, or confirm password is not valid, the form will not be submitted
+        // if the student name, student password, student confirm password, and student gender are not valid, the form will not be submitted
         if (
           isStudentNameValid == false ||
           isStudentPasswordValid == false ||
-          isStudentCPasswordValid == false
+          isStudentCPasswordValid == false ||
+          isStudentGenderValid == false
         ) {
           return false; // form will not be submitted
         } else {
@@ -130,6 +163,9 @@
         document.getElementById('spnIsStudentNameValid').innerHTML = '';
         document.getElementById('spnIsStudentPasswordValid').innerHTML = '';
         document.getElementById('spnIsStudentCPasswordValid').innerHTML = '';
+        document.getElementById('spnIsStudentGenderValid').innerHTML = '';
+        document.getElementById('rdbMale').checked = false;
+        document.getElementById('rdbFemale').checked = false;
       }
     </script>
   </body>
