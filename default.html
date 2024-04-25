@@ -77,7 +77,17 @@
         placeholder="Enter your email id"
         name="txtStudentEmailID"
       />
-      <span id="spnIsStudentEmailIDValid"></span><br /><br />
+      <span id="spnIsStudentEmailIDValid"></span><br />
+
+      <label for="">Phone Number:</label><br />
+      <input
+        type="text"
+        value=""
+        placeholder="Enter your phone number"
+        id="txtStudentPhoneNumber"
+        name="txtStudentPhoneNumber"
+      />
+      <span id="spnIsStudentPhoneNumberValid"></span><br /><br />
 
       <!-- input type submit and reset -->
       <input type="submit" value="SUBMIT" />
@@ -98,6 +108,8 @@
         let isStudentQualificationValid = true;
         // assume student email ID is valid
         let isStudentEmailIDValid = true;
+        // assume student phone number is valid
+        let isStudentPhoneNumberValid = true;
 
         // if the student name is empty, display an error message
         if (document.getElementById('txtStudentName').value == '') {
@@ -218,15 +230,41 @@
           document.getElementById('spnIsStudentEmailIDValid').style.color =
             'green';
         }
+        // if the student phone number is empty, display an error message
+        if (document.getElementById('txtStudentPhoneNumber').value == '') {
+          isStudentPhoneNumberValid = false; // student phone number is not valid
+          document.getElementById('spnIsStudentPhoneNumberValid').innerHTML =
+            '&#x2716; Please enter your phone number';
+          document.getElementById('spnIsStudentPhoneNumberValid').style.color =
+            'red';
+        } else if (
+          // if the student phone number fails the regular expression test, display an error message
+          /^\d{10}$/.test(
+            document.getElementById('txtStudentPhoneNumber').value,
+          ) == false
+        ) {
+          isStudentPhoneNumberValid = false; // student phone number is not valid
+          document.getElementById('spnIsStudentPhoneNumberValid').innerHTML =
+            '&#x2716; Please enter a valid phone number';
+          document.getElementById('spnIsStudentPhoneNumberValid').style.color =
+            'red';
+        } else {
+          isStudentPhoneNumberValid = true; // student phone number is valid
+          document.getElementById('spnIsStudentPhoneNumberValid').innerHTML =
+            '&#x2714; Valid';
+          document.getElementById('spnIsStudentPhoneNumberValid').style.color =
+            'green';
+        }
 
-        // if the student name is not valid or student password is not valid or student confirm password is not valid or student qualification is not valid, or student email ID is not valid, form will not be submitted
+        // if the student name is not valid or the student password is not valid or the student confirm password is not valid or the student gender is not valid or the student qualification is not valid or the student email ID is not valid or the student phone number is not valid, the form will not be submitted
         if (
           isStudentNameValid == false ||
           isStudentPasswordValid == false ||
           isStudentCPasswordValid == false ||
           isStudentGenderValid == false ||
           isStudentQualificationValid == false ||
-          isStudentEmailIDValid == false
+          isStudentEmailIDValid == false ||
+          isStudentPhoneNumberValid == false
         ) {
           return false; // form will not be submitted
         } else {
@@ -242,6 +280,7 @@
         document.getElementById('spnIsStudentQualificationValid').innerHTML =
           '';
         document.getElementById('spnIsStudentEmailIDValid').innerHTML = '';
+        document.getElementById('spnIsStudentPhoneNumberValid').innerHTML = '';
         // document.getElementById('rdbMale').checked = false;
         // document.getElementById('rdbFemale').checked = false;
       }
